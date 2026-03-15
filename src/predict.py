@@ -3,10 +3,6 @@ from sklearn.linear_model import LinearRegression
 
 
 def train_and_predict_for_exercise(exercise_df: pd.DataFrame) -> dict:
-    """
-    Train a simple linear regression model for one exercise and predict
-    estimated 1RM for 4 weeks and 8 weeks into the future.
-    """
     if len(exercise_df) < 2:
         raise ValueError("Not enough data points to train prediction model.")
 
@@ -39,9 +35,6 @@ def train_and_predict_for_exercise(exercise_df: pd.DataFrame) -> dict:
 
 
 def predict_all_exercises(df: pd.DataFrame) -> list[dict]:
-    """
-    Train separate models for each exercise and return prediction results.
-    """
     results = []
 
     for exercise in df["exercise"].unique():
@@ -54,10 +47,17 @@ def predict_all_exercises(df: pd.DataFrame) -> list[dict]:
     return results
 
 
+def make_prediction_results_json_safe(results: list[dict]) -> list[dict]:
+    json_safe_results = []
+
+    for result in results:
+        json_safe_result = {k: v for k, v in result.items() if k != "model"}
+        json_safe_results.append(json_safe_result)
+
+    return json_safe_results
+
+
 def print_prediction_results(results: list[dict]) -> None:
-    """
-    Print prediction results in a readable format.
-    """
     print("Prediction complete.\n")
 
     for result in results:

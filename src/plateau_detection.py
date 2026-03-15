@@ -73,3 +73,29 @@ def print_plateau_results(results: list[dict]) -> None:
             print(f"Volume change (last 4 sessions): {result['volume_change_rate']}%")
 
         print("-" * 40)
+
+def add_training_score(plateau_results: list[dict]) -> list[dict]:
+    """
+    Add a simple training score and status based on plateau risk.
+    """
+    score_map = {
+        "Low": 85,
+        "Medium": 65,
+        "High": 40,
+        "Not enough data": 50,
+    }
+
+    for result in plateau_results:
+        score = score_map.get(result["plateau_risk"], 50)
+
+        if score >= 80:
+            status = "On Track"
+        elif score >= 60:
+            status = "Watch Progress"
+        else:
+            status = "Needs Adjustment"
+
+        result["training_score"] = score
+        result["training_status"] = status
+
+    return plateau_results
