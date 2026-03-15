@@ -128,12 +128,12 @@ Reason: Estimated 1RM has improved over the last 4 sessions.
 ## Visualization
 
 ### Estimated 1RM Progress
-![Estimated 1RM Progress](outputs/figures/estimated_1rm_progress.png)
+![Estimated 1RM Progress](docs/figures/estimated_1rm_progress.png)
 
 ### Prediction Trend Examples
-![Bench Press Prediction](outputs/figures/bench_press_prediction_trend.png)
-![Squat Prediction](outputs/figures/squat_prediction_trend.png)
-![Deadlift Prediction](outputs/figures/deadlift_prediction_trend.png)
+![Bench Press Prediction](docs/figures/bench_press_prediction_trend.png)
+![Squat Prediction](docs/figures/squat_prediction_trend.png)
+![Deadlift Prediction](docs/figures/deadlift_prediction_trend.png)
 ---
 
 # How to Run
