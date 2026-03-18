@@ -5,6 +5,7 @@ from src.predict import predict_all_exercises, print_prediction_results
 from src.plateau_detection import detect_plateau_all_exercises, print_plateau_results
 from src.report import merge_results, format_report, print_report, save_report
 from src.visualize import plot_estimated_1rm_progress, plot_prediction_trend
+from src.evaluation import evaluate_all_exercises
 
 def main():
     file_path = "data/raw/sample_workout.csv"
@@ -55,6 +56,16 @@ def main():
 
     print("Saved figure to outputs/figures/estimated_1rm_progress.png")
     print("Saved prediction trend figures to outputs/figures/")
+
+    print("\n" + "=" * 50 + "\n")
+
+    evaluation_results = evaluate_all_exercises(df_features)
+
+    print("Model Evaluation\n")
+
+    for r in evaluation_results:
+        print(r)
+
 
 
 if __name__ == "__main__":
