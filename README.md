@@ -1,3 +1,4 @@
+🚀 Live Demo: https://workout-ai-749174075455.us-central1.run.app/docs
 # AI Workout Progress Predictor
 
 A machine learning project that analyzes strength training logs and predicts future performance.
@@ -170,3 +171,42 @@ Possible future extensions:
 # License
 
 This project is for educational and research purposes.
+
+# Live API
+
+The project is deployed on Google Cloud Run.
+
+Base URL:
+https://YOUR_CLOUD_RUN_URL
+
+## Available Endpoints
+
+### Health Check
+GET /health
+
+### Analyze Workout
+POST /analyze
+
+Upload a CSV file to receive:
+
+- Strength prediction (4-week / 8-week)
+- Plateau detection
+- Training score
+
+You can test it via:
+https://workout-ai-749174075455.us-central1.run.app/docs
+
+
+# Deployment
+
+This project is deployed using:
+
+- Docker
+- Google Cloud Run
+- Artifact Registry
+
+Steps:
+
+1. Build container with Cloud Build
+2. Push to Artifact Registry
+3. Deploy to Cloud Run
