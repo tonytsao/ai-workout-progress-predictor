@@ -229,3 +229,9 @@ Run locally:
 
 ```bash
 streamlit run dashboard.py
+
+This dashboard supports:
+
+workout analysis
+plateau detection
+adaptive workout planning

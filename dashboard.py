@@ -104,7 +104,7 @@ if st.button("Generate Plan"):
             st.write(plan_data["recommendation"])
 
             st.subheader("Adaptive Notes")
-            for note in plan_data["adaptive_notes"]:
+            for note in plan_data.get("adaptive_notes", []):
                 st.write(f"- {note}")
 
             if plan_data.get("plateau_summary"):
