@@ -55,6 +55,7 @@ def planner(request: PlannerRequest):
         goal=request.goal,
         days_per_week=request.days_per_week,
         experience=request.experience,
+        plateau_summary=request.plateau_summary,
     )
 
     return ApiResponse(
@@ -62,3 +63,4 @@ def planner(request: PlannerRequest):
         message="Workout plan generated successfully.",
         data=result,
     )
+

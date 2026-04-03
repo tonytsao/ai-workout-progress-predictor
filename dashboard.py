@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 
-API_BASE_URL = "https://YOUR_CLOUD_RUN_URL"
+API_BASE_URL = "https://workout-ai-749174075455.us-central1.run.app"
 
 
 st.set_page_config(page_title="AI Workout Analytics Platform", layout="wide")

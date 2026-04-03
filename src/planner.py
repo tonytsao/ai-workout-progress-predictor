@@ -1,9 +1,10 @@
-def generate_workout_plan(goal: str, days_per_week: int, experience: str) -> dict:
+def generate_workout_plan(goal: str, days_per_week: int, experience: str, plateau_summary: dict | None = None) -> dict:
     """
-    Generate a simple rule-based workout plan.
+    Generate a simple rule-based workout plan, optionally adjusted by plateau status.
     """
     goal = goal.lower()
     experience = experience.lower()
+    plateau_summary = plateau_summary or {}
 
     if goal not in {"strength", "hypertrophy", "general_fitness"}:
         raise ValueError("goal must be one of: strength, hypertrophy, general_fitness")
@@ -50,7 +51,6 @@ def generate_workout_plan(goal: str, days_per_week: int, experience: str) -> dic
         },
     }
 
-    # fallback to nearest supported template
     available_days = sorted(templates[goal].keys())
     chosen_days = min(available_days, key=lambda x: abs(x - days_per_week))
     base_plan = templates[goal][chosen_days]
@@ -61,12 +61,32 @@ def generate_workout_plan(goal: str, days_per_week: int, experience: str) -> dic
         "advanced": "Use 4-5 working sets per exercise and manage fatigue carefully.",
     }
 
+    adaptive_notes = []
+
+    if plateau_summary.get("bench_press") == "High":
+        adaptive_notes.append("Bench press plateau is high: reduce pressing fatigue and consider incline or dumbbell variation.")
+    if plateau_summary.get("squat") == "High":
+        adaptive_notes.append("Squat plateau is high: consider a lighter squat day or technique-focused variation.")
+    if plateau_summary.get("deadlift") == "High":
+        adaptive_notes.append("Deadlift plateau is high: reduce deadlift intensity and add posterior-chain accessory work.")
+
+    if not adaptive_notes:
+        adaptive_notes.append("No major plateau detected. Continue with the base plan.")
+
     plan = []
     for i, (focus, exercises) in enumerate(base_plan, start=1):
+        adjusted_exercises = exercises.copy()
+
+        if plateau_summary.get("bench_press") == "High" and "bench_press" in adjusted_exercises:
+            adjusted_exercises = ["incline_bench_press" if ex == "bench_press" else ex for ex in adjusted_exercises]
+
+        if plateau_summary.get("deadlift") == "High" and "deadlift" in adjusted_exercises:
+            adjusted_exercises = ["romanian_deadlift" if ex == "deadlift" else ex for ex in adjusted_exercises]
+
         plan.append({
             "day": i,
             "focus": focus,
-            "exercises": exercises
+            "exercises": adjusted_exercises
         })
 
     return {
@@ -75,4 +95,6 @@ def generate_workout_plan(goal: str, days_per_week: int, experience: str) -> dic
         "experience": experience,
         "plan": plan,
         "recommendation": volume_note_map[experience],
+        "adaptive_notes": adaptive_notes,
+        "plateau_summary": plateau_summary,
     }

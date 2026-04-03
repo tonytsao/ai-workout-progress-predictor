@@ -222,3 +222,10 @@ Generate a workout plan based on:
 - goal
 - days_per_week
 - experience
+
+## Dashboard
+
+Run locally:
+
+```bash
+streamlit run dashboard.py
