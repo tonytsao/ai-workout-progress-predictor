@@ -177,7 +177,7 @@ This project is for educational and research purposes.
 The project is deployed on Google Cloud Run.
 
 Base URL:
-https://YOUR_CLOUD_RUN_URL
+https://workout-ai-749174075455.us-central1.run.app/docs
 
 ## Available Endpoints
 
@@ -210,3 +210,15 @@ Steps:
 1. Build container with Cloud Build
 2. Push to Artifact Registry
 3. Deploy to Cloud Run
+
+
+## Available Endpoints
+
+### POST /analyze
+Upload a workout CSV file for prediction and plateau detection.
+
+### POST /planner
+Generate a workout plan based on:
+- goal
+- days_per_week
+- experience
